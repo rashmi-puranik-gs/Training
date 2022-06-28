@@ -1,0 +1,56 @@
+->CREATE DATABASE Company;
+->USE Company;
+
+->CREATE TABLE employees(
+e_id INT PRIMARY KEY,
+e_name varchar(15),
+contact_number varchar(15),
+salary float,
+date_of_birth date,
+email varchar(20),
+street_name varchar(15),
+city_name varchar(15),
+pin_code varchar(10),
+Gender varchar(1)
+);
+
+
+->INSERT INTO employees(e_id ,e_name ,contact_number ,salary ,date_of_birth,email ,street_name ,city_name ,pin_code ,Gender )
+values (1,"Nikita","9545198979","80000","1993-7-20","nikita@gmail.com","Baner Road","pune","401058","F");
+
+->INSERT INTO employees(e_id ,e_name ,contact_number ,salary ,date_of_birth,email ,street_name ,city_name ,pin_code ,Gender )
+values (2,"Prachi","9373679419","25000","2000-5-10","prachi@gmail.com","Aundh Road","pune","401058","F");
+
+->INSERT INTO employees(e_id ,e_name ,contact_number ,salary ,date_of_birth,email ,street_name ,city_name ,pin_code ,Gender )
+values (3,"Ajay","9658302698","25000","1997-8-20","ajay@gmail.com","Balewadi Road","pune","401058","M");
+
+->INSERT INTO employees(e_id ,e_name ,contact_number ,salary ,date_of_birth,email ,street_name ,city_name ,pin_code ,Gender )
+values (4,"Sachin","8976523590","24000","1997-5-27","sachin@gmail.com","Balewadi Road","pune","401058","F");
+
+->INSERT INTO employees(e_id ,e_name ,contact_number ,salary ,date_of_birth,email ,street_name ,city_name ,pin_code ,Gender )
+values (5,"Akanksha","7869243645","26000","1999-4-18","ak@gmail.com","MG Road","Nagpur","76846","F");
+
+->INSERT INTO employees(e_id ,e_name ,contact_number ,salary ,date_of_birth,email ,street_name ,city_name ,pin_code ,Gender )
+values (6,"Om","9850099611","50000","1999-9-30","om@gmail.com","Indira Nagar","Nashik","422103","M");
+
+->INSERT INTO employees(e_id ,e_name ,contact_number ,salary ,date_of_birth,email ,street_name ,city_name ,pin_code ,Gender )
+values (7,"Komal","6582921692","21000","1999-7-17","kl@gmail.com","londhe Road","Nashik","422103","F");
+
+->INSERT INTO employees(e_id ,e_name ,contact_number ,salary ,date_of_birth,email ,street_name ,city_name ,pin_code ,Gender )
+values (8,"Kiran","9186453870","30000","1995-5-04","kz@gmail.com","Malegoan Road","Mumbai","645732","M");
+
+
+->CREATE TABLE project(
+p_id INT,
+project_started_date DATE,
+project_name VARCHAR(20)
+);
+
+
+->INSERT INTO project(p_id, project_started_date,project_name )
+values 
+(1,"2012-5-10","IDeas"),
+(2,"2021-3-23","IDM"),
+(3,"2022-7-07","SOL"),
+(4,"2019-2-17","Multicloud"),
+(5,"2020-1-14","CSI");
