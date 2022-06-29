@@ -9,11 +9,13 @@ public class anagram {
         String s1 = input.nextLine();
         System.out.print("Enter second String: ");
         String s2 = input.nextLine();
+        String str1 = s1.toLowerCase();
+        String str2 = s2.toLowerCase();
         
         if(s1.length() == s2.length()) 
         {
-            char[] charArray1 = s1.toCharArray();
-            char[] charArray2 = s2.toCharArray();
+            char[] charArray1 = str1.toCharArray();
+            char[] charArray2 = str2.toCharArray();
 
             Arrays.sort(charArray1);
             Arrays.sort(charArray2);
