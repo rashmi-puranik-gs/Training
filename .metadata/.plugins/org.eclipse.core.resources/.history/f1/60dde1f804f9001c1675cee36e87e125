@@ -1,0 +1,9 @@
+package B;
+
+public class My_KYC_App {
+
+	public static void main(String[] args) {
+		My_KYC_App k=new My_KYC_App();
+		
+	}
+}

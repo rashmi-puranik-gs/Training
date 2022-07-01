@@ -1,0 +1,19 @@
+package A;
+import A.Employee;
+public class APP {
+
+	public static void main(String[] args) {
+		System.out.println("---------Hello---------------");
+		
+		APP app=new APP();
+		Employee e=new Employee();
+		e.setName("Ajay");
+		e.setRoll(1);
+		e.setSalary(25000);
+		
+	}
+	
+	void display() {
+		System.out.println("Name :",name);
+	}
+}

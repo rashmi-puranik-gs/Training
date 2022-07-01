@@ -1,0 +1,15 @@
+package B;
+
+public class My_KYC_App extends KYC implements New_KYC {
+
+	public static void main(String[] args) {
+		My_KYC_App k=new My_KYC_App();
+		
+	}
+
+	@Override
+	public void apply_KYC(long adhar_num) {
+		// TODO Auto-generated method stub
+		
+	}
+}

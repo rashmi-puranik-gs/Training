@@ -1,0 +1,15 @@
+package B;
+
+public class KYC {
+	
+	    public void apply_KYC(String pan_num,String pass_numString) {
+	    	
+	    }
+	    public void apply_KYC(long adhar_num) {
+	    	
+	    }
+
+	
+	
+
+}

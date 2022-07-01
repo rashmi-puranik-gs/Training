@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Move element &apos;RemoveDuplicates.java&apos; to &apos;Remove_Duplicate_Elements/src/C&apos;&#x0A;- Original project: &apos;Remove_Duplicate_Elements&apos;&#x0A;- Destination element: &apos;Remove_Duplicate_Elements/src/C&apos;&#x0A;- Original element: &apos;RemoveDuplicates.java&apos;&#x0A;- Update references to refactored element" description="Move compilation unit" destination="/src&lt;C" element1="/src&lt;{RemoveDuplicates.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.move" policy="org.eclipse.jdt.ui.moveResources" qualified="false" references="true" stamp="1656658111720" units="1" version="1.0"/>
+</session>

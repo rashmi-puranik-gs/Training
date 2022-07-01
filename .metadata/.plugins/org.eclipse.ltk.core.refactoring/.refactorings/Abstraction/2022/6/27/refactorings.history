@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Move 4 elements to &apos;Abstraction/src/A&apos;&#x0A;- Original project: &apos;Abstraction&apos;&#x0A;- Destination element: &apos;Abstraction/src/A&apos;&#x0A;- Original elements:&#x0A;     HDFC.java&#x0A;     Bank.java&#x0A;     ICICI.java&#x0A;     Bank_App.java&#x0A;- Update references to refactored element" description="Move compilation units" destination="/src&lt;A" element1="/src&lt;{HDFC.java" element2="/src&lt;{Bank.java" element3="/src&lt;{ICICI.java" element4="/src&lt;{Bank_App.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.move" policy="org.eclipse.jdt.ui.moveResources" qualified="false" references="true" stamp="1656610945755" units="4" version="1.0"/>
+</session>

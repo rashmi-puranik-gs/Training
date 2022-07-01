@@ -1,0 +1,19 @@
+package A;
+public class Bank_App{
+
+public static void main(String[] args) 
+        {
+        
+		float Anual_Package= 600000;
+        Bank h=new HDFC();
+        h.CurrentAccount(Anual_Package);
+        h.SavingAccount();
+        
+        Bank i=new  ICICI();
+        i.CurrentAccount(Anual_Package);
+        i.SavingAccount();
+        i.Loan();        
+        
+        }
+    
+}

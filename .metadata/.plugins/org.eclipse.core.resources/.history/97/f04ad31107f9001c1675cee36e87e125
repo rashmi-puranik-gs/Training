@@ -1,0 +1,20 @@
+package B;
+
+import java.math.BigInteger;
+
+public class My_KYC_App extends KYC implements New_KYC {
+
+	@Override
+	public void apply_KYC(BigInteger adhar_num) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	public static void main(String[] args) {
+		
+		BigInteger b=new BigInteger(746528926155);
+		My_KYC_App k=new My_KYC_App();
+		k.apply_KYC(9876325);
+		k.apply_KYC("hdj667676", "H68539");
+	}
+}

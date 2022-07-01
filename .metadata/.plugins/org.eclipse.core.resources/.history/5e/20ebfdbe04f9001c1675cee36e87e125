@@ -1,0 +1,6 @@
+package B;
+
+public interface New_KYC {
+
+	public void apply_KYC(long adhar_num);
+}

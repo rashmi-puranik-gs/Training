@@ -1,0 +1,26 @@
+package B;
+
+import java.math.BigInteger;
+import java.util.Scanner;
+
+public class My_KYC_App extends KYC implements New_KYC {
+
+	@Override
+	public void apply_KYC(String adhar) {
+		System.out.println("KYC Done Using Adhar Number :"+adhar);
+		
+	}
+	
+	public static void main(String[] args) {
+	
+		My_KYC_App k=new My_KYC_App();
+		Scanner sc =new Scanner(System.in);
+		
+		System.out.println("1.HDFC   2.ICICI");
+		System.out.println("Select Bank To Create Account :");
+		int n=sc.nextInt();
+		
+		k.apply_KYC("648383483838");
+		k.apply_KYC("hdj667676", "H68539");
+	}
+}

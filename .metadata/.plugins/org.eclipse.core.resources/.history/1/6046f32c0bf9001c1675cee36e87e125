@@ -1,0 +1,47 @@
+package C;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
+import java.util.Scanner;
+import java.util.Set;
+
+public class RemoveDuplicates {
+    public void AddElement(){
+        ArrayList<Integer> l =new ArrayList<>();
+        Iterator<Integer> itr=l.listIterator();
+
+       // Scanner sc=new Scanner(System.in);
+        //System.out.println("How many Numbers you want to add ?");
+        //int n=sc.nextInt();
+        //int k=1;
+
+        // for(int i=0;i<n;i++){
+            
+        //     System.out.println("enter element no " +k);
+        //      int x=sc.nextInt();
+        //      l.add(x);
+        //      k++;
+            l.add(1);
+            l.add(2);
+            l.add(3);
+             while (itr.hasNext()){
+                 for (int i = 0; i < l.size()-1; i++){
+                     if (itr.next().equals(l.get(i)))
+                     {
+                         itr.remove();
+                     }
+                  }
+             }
+         System.out.println("List Entered "+l);
+
+        
+        }
+
+    public static void main(String[] args) {
+        RemoveDuplicates r=new RemoveDuplicates();
+        r.AddElement();
+    }
+
+}
