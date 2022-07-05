@@ -1,0 +1,131 @@
+-> Example Database:
+1. Create table for 'employee'.
+->CREATE TABLE employee (id INT PRIMARY KEY, name VARCHAR(100), age INT, dob DATE, department VARCHAR(100));
+
++----+----------+------+------------+-----------------+
+| id | name     | age  | dob        | department      |
++----+----------+------+------------+-----------------+
+|  1 | Darren   |   32 | 1988-05-20 | ENGINEERING     |
+|  2 | Abhishek |   28 | 1992-05-20 | ACCOUNTING      |
+|  3 | Amit     |   30 | 1990-09-20 | ENGINEERING     |
+|  4 | Steven   |   40 | 1980-05-21 | HUMAN RESOURCES |
+|  5 | Kartik   |   20 | 2000-05-12 | TRAINEE         |
++----+----------+------+------------+-----------------+
+
+2. Create table for 'student'.
+-> CREATE TABLE student (id INT PRIMARY KEY, name VARCHAR(100), age INT, dob DATE, department VARCHAR(100));
+
++----+---------+------+------------+-------------+
+| id | name    | age  | dob        | department  |
++----+---------+------+------------+-------------+
+|  1 | Akash   |   22 | 1998-05-17 | COMPUTER    |
+|  2 | Ian     |   26 | 1994-06-18 | COMPUTER    |
+|  3 | Shirley |   19 | 2001-11-20 | MECHANICAL  |
+|  4 | Joana   |   21 | 1999-05-21 | ELECTRONICS |
+|  5 | Kartik  |   20 | 2000-05-12 | COMPUTER    |
++----+---------+------+------------+-------------+
+
+-> UNION Example:
+1. From both 'employee' and 'student' tables, write a sql query to combine both tables without repetation of name.
+
+->SELECT name, age
+ FROM employee 
+ UNION SELECT name, age FROM student;
+
++----------+------+
+| name     | age  |
++----------+------+
+| Darren   |   32 |
+| Abhishek |   28 |
+| Amit     |   30 |
+| Steven   |   40 |
+| Kartik   |   20 |
+| Akash    |   22 |
+| Ian      |   26 |
+| Shirley  |   19 |
+| Joana    |   21 |
++----------+------+
+
+-> UNION ALL Example:
+2. Write sql query to combine 'employee' ans 'student' table.
+
+->SELECT name, age FROM employee
+UNION ALL
+SELECT name, age FROM student;
+
++----------+------+
+| name     | age  |
++----------+------+
+| Darren   |   32 |
+| Abhishek |   28 |
+| Amit     |   30 |
+| Steven   |   40 |
+| Kartik   |   20 |
+| Akash    |   22 |
+| Ian      |   26 |
+| Shirley  |   19 |
+| Joana    |   21 |
+| Kartik   |   20 |
++----------+------+
+
+-> ORDER BY EXAMPLE:
+3.Write a sql query to sort name of 'employee' and 'student' in ascending order.
+
+->  SELECT name, age FROM employee
+    UNION
+    SELECT name, age FROM student
+    ORDER BY age asc;
+
++----------+------+
+| name     | age  |
++----------+------+
+| Shirley  |   19 |
+| Kartik   |   20 |
+| Joana    |   21 |
+| Akash    |   22 |
+| Ian      |   26 |
+| Abhishek |   28 |
+| Amit     |   30 |
+| Darren   |   32 |
+| Steven   |   40 |
++----------+------+
+
+->GROUP BY AND COUNT:
+
+4.Write a sql query for count the total numbers of each age number.
+
+->SELECT age , COUNT(age)
+FROM student
+GROUP BY age;
++------+------------+
+| age  | COUNT(age) |
++------+------------+
+|   19 |          1 |
+|   20 |          1 |
+|   21 |          1 |
+|   22 |          1 |
+|   26 |          1 |
++------+------------+
+
+-> HAVING:
+
+5. Write a sql query for cout the totable numbers of age greater than 20.
+
+->SELECT age , COUNT(age) FROM student GROUP BY age HAVING age>20;
++------+------------+
+| age  | COUNT(age) |
++------+------------+
+|   21 |          1 |
+|   22 |          1 |
+|   26 |          1 |
++------+------------+
+
+6.Write a sql query for students infromation who is eldest in 'student' table.
+
+->SELECT * FROM student where age=(SELECT MAX(age) from student);
++----+------+------+------------+------------+
+| id | name | age  | dob        | department |
++----+------+------+------------+------------+
+|  2 | Ian  |   26 | 1994-06-18 | COMPUTER   |
++----+------+------+------------+------------+
+
