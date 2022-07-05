@@ -1,0 +1,58 @@
+-> Inner Join Example:
+
+1. Write a sql to show e_id and e_name with there project_name.
+
+SELECT employees.e_id,employees.e_name,project.project_name 
+FROM employees 
+INNER JOIN project
+ ON employees.e_id = project.p_id;
++------+----------+--------------+
+| e_id | e_name   | project_name |
++------+----------+--------------+
+|    1 | Nikita   | IDeas        |
+|    2 | Prachi   | IDM          |
+|    3 | Ajay     | SOL          |
+|    4 | Sachin   | Multicloud   |
+|    5 | Akanksha | CSI          |
++------+----------+--------------+
+
+2.List all the employees name from 'employee' coloum  with project_name.
+
+-> Left Join Example:
+
+SELECT employees.e_id,employees.e_name,project.project_name 
+FROM employees 
+LEFT JOIN project
+ON employees.e_id = project.p_id;
+
++------+----------+--------------+
+| e_id | e_name   | project_name |
++------+----------+--------------+
+|    1 | Nikita   | IDeas        |
+|    2 | Prachi   | IDM          |
+|    3 | Ajay     | SOL          |
+|    4 | Sachin   | Multicloud   |
+|    5 | Akanksha | CSI          |
+|    6 | Om       | NULL         |
+|    7 | Komal    | NULL         |
+|    8 | Kiran    | NULL         |
++------+----------+--------------+
+
+3.List all the projects from 'project' table with p_id,e_id and e_name.
+
+-> Right Join Example:
+
+SELECT employees.e_id,employees.e_name,project.project_name,project.p_id 
+FROM employees 
+RIGHT JOIN project 
+ON employees.e_id = project.p_id;
++------+----------+--------------+------+
+| e_id | e_name   | project_name | p_id |
++------+----------+--------------+------+
+|    1 | Nikita   | IDeas        |    1 |
+|    2 | Prachi   | IDM          |    2 |
+|    3 | Ajay     | SOL          |    3 |
+|    4 | Sachin   | Multicloud   |    4 |
+|    5 | Akanksha | CSI          |    5 |
++------+----------+--------------+------+
+
