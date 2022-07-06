@@ -1,9 +1,0 @@
-package A;
-
-public class Employee {
-	int roll;
-	String name;
-	float salary;
-	
-	
-}
