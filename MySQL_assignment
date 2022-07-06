@@ -1,0 +1,319 @@
+    *** MySQL Assignments ***
+------------------------------------------------------------------------------------
+    ### TABLES ### (books , authors)
+
+Q. Create a table books and authors.
+
+mysql> select * from books;
+
++----+------------------+------------+-----------+-----------+---------------+
+| id | title            | type       | author_id | editor_id | translator_id |
++----+------------------+------------+-----------+-----------+---------------+
+|  1 | Time to Grow Up! | original   |        11 |        21 |          NULL |
+|  2 | Your Trip        | translated |        15 |        22 |            32 |
+|  3 | Lovely Love      | original   |        14 |        24 |          NULL |
+|  4 | Dream Your Life  | original   |        11 |        24 |          NULL |
+|  5 | Oranges          | translated |        12 |        25 |            31 |
+|  6 | Your Happy Life  | translated |        15 |        22 |            33 |
+|  7 | Applied AI       | translated |        13 |        23 |            34 |
+|  8 | My Last Book     | original   |        11 |        28 |          NULL |
++----+------------------+------------+-----------+-----------+---------------+
+
+
+mysql> select * from authors;
+
++----+------------+-----------+
+| id | first_name | last_name |
++----+------------+-----------+
+| 11 | Ellen      | Writer    |
+| 12 | Olga       | Savelieva |
+| 13 | Jack       | Smart     |
+| 14 | Donald     | Brain     |
+| 15 | Yao        | Dou       |
++----+------------+-----------+
+
+
+------------------------------------------------------------------------------------
+#    ## INNER JOIN ###
+
+Q . Get batching records from both the tables.
+
+mysql> select books.id,books.title,
+        authors.first_name from books 
+        inner join authors on books.author_id=
+        authors.id;
+
++----+------------------+------------+
+| id | title            | first_name |
++----+------------------+------------+
+|  1 | Time to Grow Up! | Ellen      |
+|  2 | Your Trip        | Yao        |
+|  3 | Lovely Love      | Donald     |
+|  4 | Dream Your Life  | Ellen      |
+|  5 | Oranges          | Olga       |
+|  6 | Your Happy Life  | Yao        |
+|  7 | Applied AI       | Jack       |
+|  8 | My Last Book     | Ellen      |
++----+------------------+------------+
+
+
+------------------------------------------------------------------------------------
+    ### RIGHT JOIN ###
+
+Q . Get all the records from authors table and only matching records from books table.
+
+mysql> select books.title, books.author_id 
+        from books RIGHT JOIN authors ON   
+        books.author_id=authors.id;
+
++------------------+-----------+
+| title            | author_id |
++------------------+-----------+
+| My Last Book     |        11 |
+| Dream Your Life  |        11 |
+| Time to Grow Up! |        11 |
+| Oranges          |        12 |
+| Applied AI       |        13 |
+| Lovely Love      |        14 |
+| Your Happy Life  |        15 |
+| Your Trip        |        15 |
+| NULL             |      NULL |
++------------------+-----------+
+
+
+------------------------------------------------------------------------------------
+    ### LEFT JOIN ###
+
+Q. Get all the records from books table and only matching records from authors table.
+
+mysql> select books.title, books.author_id 
+    from books LEFT JOIN authors ON 
+    books.author_id=authors.id;
+
++------------------+-----------+
+| title            | author_id |
++------------------+-----------+
+| Time to Grow Up! |        11 |
+| Your Trip        |        15 |
+| Lovely Love      |        14 |
+| Dream Your Life  |        11 |
+| Oranges          |        12 |
+| Your Happy Life  |        15 |
+| Applied AI       |        13 |
+| My Last Book     |        11 |
++------------------+-----------+
+
+------------------------------------------------------------------------------------
+    ### CROSS JOIN ###
+
+mysql> select books.title, authors.first_name
+         from books CROSS JOIN authors;
+
++------------------+------------+
+| title            | first_name |
++------------------+------------+
+| Time to Grow Up! | Ellen      |
+| Time to Grow Up! | Yao        |
+| Time to Grow Up! | Donald     |
+| Time to Grow Up! | Jack       |
+| Time to Grow Up! | Olga       |
+| Time to Grow Up! | Ellen      |
+| Your Trip        | Ellen      |
+| Your Trip        | Yao        |
+| Your Trip        | Donald     |
+| Your Trip        | Jack       |
+| Your Trip        | Olga       |
+| Your Trip        | Ellen      |
+| Lovely Love      | Ellen      |
+| Lovely Love      | Yao        |
+| Lovely Love      | Donald     |
+| Lovely Love      | Jack       |
+| Lovely Love      | Olga       |
+| Lovely Love      | Ellen      |
+| Dream Your Life  | Ellen      |
+| Dream Your Life  | Yao        |
+| Dream Your Life  | Donald     |
+| Dream Your Life  | Jack       |
+| Dream Your Life  | Olga       |
+| Dream Your Life  | Ellen      |
+| Oranges          | Ellen      |
+| Oranges          | Yao        |
+| Oranges          | Donald     |
+| Oranges          | Jack       |
+| Oranges          | Olga       |
+| Oranges          | Ellen      |
+| Your Happy Life  | Ellen      |
+| Your Happy Life  | Yao        |
+| Your Happy Life  | Donald     |
+| Your Happy Life  | Jack       |
+| Your Happy Life  | Olga       |
+| Your Happy Life  | Ellen      |
+| Applied AI       | Ellen      |
+| Applied AI       | Yao        |
+| Applied AI       | Donald     |
+| Applied AI       | Jack       |
+| Applied AI       | Olga       |
+| Applied AI       | Ellen      |
+| My Last Book     | Ellen      |
+| My Last Book     | Yao        |
+| My Last Book     | Donald     |
+| My Last Book     | Jack       |
+| My Last Book     | Olga       |
+| My Last Book     | Ellen      |
++------------------+------------+
+
+
+------------------------------------------------------------------------------------
+    ### GROUP BY ###
+
+mysql> select author_id,count(author_id) 
+from books group by author_id;
+
++-----------+------------------+
+| author_id | count(author_id) |
++-----------+------------------+
+|        11 |                3 |
+|        15 |                2 |
+|        14 |                1 |
+|        12 |                1 |
+|        13 |                1 |
++-----------+------------------+
+
+------------------------------------------------------------------------------------
+    ### UNION ### (Duplicate records does not display)
+
+Q .write a query to get title , type of books table and 
+   first_name,last_name of authors table and display by combining both the 
+   table records in title , type columns.
+
+mysql> select title, type from books 
+        UNION select first_name,last_name 
+        from authors;
+
++------------------+------------+
+| title            | type       |
++------------------+------------+
+| Time to Grow Up! | original   |
+| Your Trip        | translated |
+| Lovely Love      | original   |
+| Dream Your Life  | original   |
+| Oranges          | translated |
+| Your Happy Life  | translated |
+| Applied AI       | translated |
+| My Last Book     | original   |
+| Ellen            | Writer     |
+| Olga             | Savelieva  |
+| Jack             | Smart      |
+| Donald           | Brain      |
+| Yao              | Dou        |
++------------------+------------+
+
+------------------------------------------------------------------------------------
+
+    ### UNION ALL ### (we also got duplicate records)
+
+Q .write a query to get title , type of books table and 
+   first_name,last_name of authors table and display by combining both the 
+   table records in title , type columns.
+
+mysql> select title, type from books UNION ALL
+     select first_name,last_name from authors;
+
++------------------+------------+
+| title            | type       |
++------------------+------------+
+| Time to Grow Up! | original   |
+| Your Trip        | translated |
+| Lovely Love      | original   |
+| Dream Your Life  | original   |
+| Oranges          | translated |
+| Your Happy Life  | translated |
+| Applied AI       | translated |
+| My Last Book     | original   |
+| Ellen            | Writer     |
+| Olga             | Savelieva  |
+| Jack             | Smart      |
+| Donald           | Brain      |
+| Yao              | Dou        |
+| Ellen            | Writer     |
++------------------+------------+
+
+
+------------------------------------------------------------------------------------
+    ### ORDER BY ###
+mysql> select title, type from books UNION
+        select first_name,last_name 
+        from authors ORDER BY title;
+
++------------------+------------+
+| title            | type       |
++------------------+------------+
+| Applied AI       | translated |
+| Donald           | Brain      |
+| Dream Your Life  | original   |
+| Ellen            | Writer     |
+| Jack             | Smart      |
+| Lovely Love      | original   |
+| My Last Book     | original   |
+| Olga             | Savelieva  |
+| Oranges          | translated |
+| Time to Grow Up! | original   |
+| Yao              | Dou        |
+| Your Happy Life  | translated |
+| Your Trip        | translated |
++------------------+------------+
+
+
+------------------------------------------------------------------------------------
+    ### GROUP BY ###
+Q. Write a query to get count of records in type column of books table.
+
+mysql> select type, COUNT(type) 
+        from books GROUP BY type;
+
++------------+-------------+
+| type       | COUNT(type) |
++------------+-------------+
+| original   |           4 |
+| translated |           4 |
++------------+-------------+
+
+
+------------------------------------------------------------------------------------
+    ### HAVING ###
+
+Q. Write a query to get count of records in author_id column having author_id is 
+   greater than 13of books table.
+
+mysql> select author_id, COUNT(author_id) 
+        from books GROUP BY author_id 
+        HAVING author_id>13;
+
++-----------+------------------+
+| author_id | COUNT(author_id) |
++-----------+------------------+
+|        15 |                2 |
+|        14 |                1 |
++-----------+------------------+
+
+
+------------------------------------------------------------------------------------
+
+Q. Write a query to get all record from books table who having minimun author_id.
+
+mysql> select * from books where 
+        author_id=(select MIN(author_id) 
+        from books);
+
++----+------------------+----------+-----------+-----------+---------------+
+| id | title            | type     | author_id | editor_id | translator_id |
++----+------------------+----------+-----------+-----------+---------------+
+|  1 | Time to Grow Up! | original |        11 |        21 |          NULL |
+|  4 | Dream Your Life  | original |        11 |        24 |          NULL |
+|  8 | My Last Book     | original |        11 |        28 |          NULL |
++----+------------------+----------+-----------+-----------+---------------+
+
+
+------------------------------------------------------------------------------------
+
+
