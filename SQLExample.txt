@@ -1,0 +1,195 @@
+﻿
+create two tables employee and project write query based on innerjoin.
+
+Write query to combine two rows of differnt table using join which can consider only machining record.
+
+select employee.ename,project.pname from employee inner join project on project.eid=employee.eid;
+
++--------+--------------+
+| ename  | pname        |
++--------+--------------+
+| Amit   | IDas         |
+| Saloni | IDas         |
+| Akash  | Devops       |
+| Priya  | Devops       |
+| Akash  | Microservice |
+| Priya  | Idas         |
+| Billy  | IDM          |
+| Priya  | Node.js      |
+
+
+
+
+Write query which display ename,salary,pname,which working on same projects.
+
+select employee.ename,project.pname from employee left join project on employee.eid=project.eid where pname='Idas';
+
++--------+-------+
+| ename  | pname |
++--------+-------+
+| Amit   | IDas  |
+| Saloni | IDas  |
+| Priya  | Idas  |
+
+
+
+select employee.ename,employee.salary,project.pname from employee left join project on employee.eid=project.eid;
+
++--------+--------+--------------+
+| ename  | salary | pname        |
++--------+--------+--------------+
+| Amit   |  22000 | IDas         |
+| Saloni |  12000 | IDas         |
+| Akash  |  13000 | Microservice |
+| Akash  |  13000 | Devops       |
+| Priya  |   1000 | Devops       |
+| Priya  |  11000 | Node.js      |
+| Priya  |  11000 | Idas         |
+| Billy  |  14000 | IDM          |
+| silly  |  15000 | NULL         |
+| el     |  15000 | NULL         |
+| Nikita |  16000 | NULL         |
+| Nish   |  10000 | NULL         |
+
+
+
+
+
+write a query to perform right joins on employee table and project tables.
+
+select employee.ename,employee.salary,project.pname from employee right join project on employee.eid=project.eid;
+
+| ename  | salary | pname        |
++--------+--------+--------------+
+| Amit   |  22000 | IDas         |
+| Saloni |  12000 | IDas         |
+| Akash  |  13000 | Devops       |
+| Priya  |   1000 | Devops       |
+| Akash  |  13000 | Microservice |
+| Priya  |  11000 | Idas         |
+| Billy  |  14000 | IDM          |
+| Priya  |  11000 | Node.js      |
+
+
+
+
+
+create two tables for student and marks and apply union query on those table.
+
+select * from student;
+
+ 
+
++-------+------+--------+
+| name  | sid  | course |
++-------+------+--------+
+| maya  |  111 | cs     |
+| saeer |  112 | ETC    |
+
+
+
+
+
+
+select * from marks;
+
++-------+------+------+
+| name  | sid  | cgp  |
++-------+------+------+
+| maya  |  111 |  6.2 |
+| saeer |  112 |  7.8 |
+
+
+
+
+
+
+select name,sid from student union select name,sid from marks;
+
++-------+------+
+| name  | sid  |
++-------+------+
+| maya  |  111 |
+| saeer |  112 |
+
+
+
+
+write a query on table studen and marks which display all rows.
+
+select name,sid from student union all select  name,sid from marks;
+
++-------+------+
+| name  | sid  |
++-------+------+
+| maya  |  111 |
+| saeer |  112 |
+| maya  |  111 |
+| saeer |  112 |
+
+
+
+
+write query on customer table where all records display with respect to city coloum.
+
+select city ,cname from customer group by city,cname;
+
++------------+----------------+
+| city       | cname          |
++------------+----------------+
+| New York   | Nick Rimando   |
+| New York   | Brad Davis     |
+| California | Graham Zusi    |
+| London     | Julian Green   |
+| Paris      | Fabian Johnson |
+| Berlin     | Geoff Cameron  |
+| Moscow     | Jozy Altidor   |
+|            |                |
+
+
+
+
+select city ,cname from customer group by city,cname order by cname ;
+
++------------+----------------+
+| city       | cname          |
++------------+----------------+
+|            |                |
+| New York   | Brad Davis     |
+| Paris      | Fabian Johnson |
+| Berlin     | Geoff Cameron  |
+| California | Graham Zusi    |
+| Moscow     | Jozy Altidor   |
+| London     | Julian Green   |
+| New York   | Nick Rimando   |
+
+
+
+
+write a query to used having cluase.
+
+select cname,city from customer group by cname,city having sum(grade)>100;
+
++----------------+------------+
+| cname          | city       |
++----------------+------------+
+| Brad Davis     | New York   |
+| Graham Zusi    | California |
+| Julian Green   | London     |
+| Fabian Johnson | Paris      |
+| Jozy Altidor   | Moscow     |
+|                |            |
+
+
+
+
+select  max(salary) from employee;
+
++-------------+
+| max(salary) |
++-------------+
+|       22000 |
+
+
+
+
