@@ -1,1 +1,54 @@
+package assingment4;
+
+public class Kyc_with_pan_passport_num 
+{
+	public void old_kyc(String PanCardNum,String PassPortNum)
+	{
+		System.out.println("kyc using Pan_num: "+PanCardNum+" "+"kyc using Passport_num: "+PassPortNum);
+	}
+
+}
+
+interface Kyc_with_adhar 
+{
+	public void new_kyc(long Adhar_num);
+
+}
+
+
+public class My_kyc_app extends Kyc_with_pan_passport_num implements Kyc_with_adhar 
+{
+  public void new_kyc(long Adhar_num) 
+	{
+		System.out.println("Kyc using Adhar number: "+Adhar_num);
+	}
+
+}
+
+import java.util.Scanner;
+
+public class Check_kyc {
+
+	public static void main(String[] args) 
+	{
+		My_kyc_app m=new My_kyc_app();
+		Scanner sc=new Scanner(System.in);
+		System.out.println("enter the num");
+		int num=sc.nextInt();
+		switch (num) 
+		{
+		case 1: {
+			       m.old_kyc("44252677a", "366373e7f");
+			       break;	
+				 }
+		case 2: {
+			       m.new_kyc(1232356378);
+			       break;
+		        }
+		default:
+			throw new IllegalArgumentException("wrong: " + num);
+		}
+	}
+
+}
 
