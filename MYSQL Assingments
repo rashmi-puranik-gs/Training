@@ -1,1 +1,32 @@
+INNER JOIN
+
+write a sql query to display records that have matching values in both tables.
+select employes.eid,employes.eName,Project.Project_name
+from employes
+inner join Project
+on employes.eid=Project.pid;
+
+LEFT JOIN
+
+write a sql query to display all  records from employes table that have matching values in Project tables in ascending order by column eName.
+select e.eid,e.eName,p.Project_name
+from employes e
+left join Project p
+on e.eid=p.pid
+order by e.eName;
+
+RIGHT JOIN
+
+
+write a sql query to display all  records from Projcet table that have matching values in employes tables in ascending order by column eName.
+select e.eid,e.eName,p.Project_name
+from employes e
+right join Project p
+on e.eid=p.pid
+order by e.eName;
+
+CROSS JOIN 
+Write a query to perform the cross join operation considering the employes table as the left table and the Project table as the right table.
+select * from employes cross join Project
+order by eid;
 
