@@ -1,0 +1,71 @@
+INNER JOIN
+
+write a sql query to display records that have matching values in both tables.
+select employes.eid,employes.eName,Project.Project_name
+from employes
+inner join Project
+on employes.eid=Project.pid;
+
+LEFT JOIN
+
+write a sql query to display all  records from employes table that have matching values in Project tables in ascending order by column eName.
+select e.eid,e.eName,p.Project_name
+from employes e
+left join Project p
+on e.eid=p.pid
+order by e.eName;
+
+RIGHT JOIN
+
+
+write a sql query to display all  records from Projcet table that have matching values in employes tables in ascending order by column eName.
+select e.eid,e.eName,p.Project_name
+from employes e
+right join Project p
+on e.eid=p.pid
+order by e.eName;
+
+CROSS JOIN 
+Write a query to perform the cross join operation considering the employes table as the left table and the Project table as the right table.
+select * from employes cross join Project
+order by eid;
+
+GROUP BY
+1)write a query to get the count of employes with respect to Gender.
+select Gender,count(Gender)
+from employes
+group by Gender;
+
+2)write a query to get the count of employes with respect to joining date.
+select Date_of_joining as joining,count(Date_of_joining)
+from employes
+group by Date_of_joining;
+
+Using Having Clause
+1)write a query to get the count of employes with respect to gender whose countis greater than 4.
+select Gender,count(Gender)
+from employes
+group by Gender
+having count(Gender)>4;
+
+Using ORDER BY
+1)Select all records from the employes table, sort the result alphabetically by the column Salary.
+select * from employes
+order by Salary;
+
+2)Write a query from the employes table,sort the result by column eid with limitof 2.
+select eid,eName,Salary,Gender 
+from employes
+order by eid
+limit 2; 
+
+UNION and UNION ALL
+1)write SQL query returns the  cities (only distinct values) from both the "Customers" and the "Suppliers" table.
+select City from Customers
+UNION
+select City from Suppliers;
+
+2)write SQL query returns the cities (duplicate values also) from both the "Customers" and the "Suppliers" table.
+select City from Customers
+UNION ALL
+select City from Suppliers;
