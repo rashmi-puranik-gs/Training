@@ -1,0 +1,303 @@
+*************Stored Procedure Examples****************
+
+* Create a procedure that selects students information.
+> delimiter /
+    -> create procedure spStudent()
+    -> begin
+    -> select * from student;
+    -> end;
+    -> /
+
+mysql-> call spStudent/
++----+---------+------+------------+-------------+
+| id | name    | age  | dob        | department  |
++----+---------+------+------------+-------------+
+|  1 | Akash   |   22 | 1998-05-17 | COMPUTER    |
+|  2 | Ian     |   26 | 1994-06-18 | COMPUTER    |
+|  3 | Shirley |   19 | 2001-11-20 | MECHANICAL  |
+|  4 | Joana   |   21 | 1999-05-21 | ELECTRONICS |
+|  5 | Kartik  |   20 | 2000-05-12 | COMPUTER    |
++----+---------+------+------------+-------------+
+
+1.Procedure without Parameter:
+
+* Create a procedure that selects show students information and DOB should be in ascending order.
+
+    -> CREATE PROCEDURE studentList1 () 
+    -> BEGIN  
+    -> SELECT name, age, department,dob
+    -> FROM student  
+    -> ORDER BY dob;
+    -> END;
+    -> /
+
+mysql> call studentList1/   
++---------+------+-------------+------------+
+| name    | age  | department  | dob        |
++---------+------+-------------+------------+
+| Ian     |   26 | COMPUTER    | 1994-06-18 |
+| Akash   |   22 | COMPUTER    | 1998-05-17 |
+| Joana   |   21 | ELECTRONICS | 1999-05-21 |
+| Kartik  |   20 | COMPUTER    | 2000-05-12 |
+| Shirley |   19 | MECHANICAL  | 2001-11-20 |
++---------+------+-------------+------------+
+
+2.Procedures with IN Parameter: 
+    It is the default mode. It takes a parameter as input, such as an attribute.
+    When we define it, the calling program has to pass an argument to the stored procedure. 
+    This parameters value is always protected.
+
+* Write a stored procedure that selects total number of students and take parameter from user to show how many students information they want.
+
+    ->CREATE PROCEDURE get_student (IN var1 INT)  
+    -> BEGIN  
+    ->     SELECT * FROM student LIMIT var1;  
+    ->     SELECT COUNT(age) AS Total_Student FROM student;    
+    -> END ;
+    -> / 
+
+mysql> call get_student(3)/
++----+---------+------+------------+------------+
+| id | name    | age  | dob        | department |
++----+---------+------+------------+------------+
+|  1 | Akash   |   22 | 1998-05-17 | COMPUTER   |
+|  2 | Ian     |   26 | 1994-06-18 | COMPUTER   |
+|  3 | Shirley |   19 | 2001-11-20 | MECHANICAL |
++----+---------+------+------------+------------+
+
++---------------+
+| Total_Student |
++---------------+
+|             5 |
++---------------+
+
+
+3.Procedures with OUT Parameter:
+    It is used to pass a parameter as output. 
+    Its value can be changed inside the stored procedure, and the changed (new) value is passed back to the calling program. 
+  
+* Write a stored procedure that eldest student.Use session variable.
+
+    -> CREATE PROCEDURE display_max_age (OUT eldest INT)  
+    -> BEGIN  
+    ->     SELECT MAX(age) INTO eldest FROM student;   
+    -> END;
+    -> /
+
+mysql> call display_max_age(@M)/
+
+mysql> SELECT @M/                               //'@M is session variable'
++------+
+| @M   |
++------+
+|   26 |
++------+
+
+4.Procedures with INOUT Parameter:
+    It is a combination of IN and OUT parameters. 
+    It means the calling program can pass the argument, and the procedure can modify the INOUT parameter, and then passes the new value back to the calling program.
+
+* Write a stored procedure take students id from user and disply age of that student.
+
+    ->CREATE PROCEDURE display_age_of_student (INOUT var1 INT)  
+    ->BEGIN  
+    ->SELECT age INTO var1 FROM student WHERE id = var1;   
+    ->END;
+    ->/
+
+mysql> SET @A = '20'/
+
+mysql> call display_age_of_student(@A)/
+
+mysql> SELECT @A/
++------+
+| @A   |
++------+
+|   20 |
++------+
+
+
+5.How to show or list stored procedures in MySQL?
+
+mysql> SHOW PROCEDURE STATUS WHERE db = 'Example';
+    -> /
++---------+------------------------+-----------+----------------+---------------------+---------------------+---------------+---------+----------------------+----------------------+--------------------+
+| Db      | Name                   | Type      | Definer        | Modified            | Created             | Security_type | Comment | character_set_client | collation_connection | Database Collation |
++---------+------------------------+-----------+----------------+---------------------+---------------------+---------------+---------+----------------------+----------------------+--------------------+
+| Example | display_age            | PROCEDURE | root@localhost | 2022-07-07 13:41:40 | 2022-07-07 13:41:40 | DEFINER       |         | utf8                 | utf8_general_ci      | latin1_swedish_ci  |
+| Example | display_age_of_student | PROCEDURE | root@localhost | 2022-07-07 14:40:57 | 2022-07-07 14:40:57 | DEFINER       |         | utf8                 | utf8_general_ci      | latin1_swedish_ci  |
+| Example | display_age_student    | PROCEDURE | root@localhost | 2022-07-07 14:38:38 | 2022-07-07 14:38:38 | DEFINER       |         | utf8                 | utf8_general_ci      | latin1_swedish_ci  |
+| Example | display_max_age        | PROCEDURE | root@localhost | 2022-07-07 13:34:52 | 2022-07-07 13:34:52 | DEFINER       |         | utf8                 | utf8_general_ci      | latin1_swedish_ci  |
+| Example | get_student            | PROCEDURE | root@localhost | 2022-07-07 13:21:33 | 2022-07-07 13:21:33 | DEFINER       |         | utf8                 | utf8_general_ci      | latin1_swedish_ci  |
+| Example | spStudent              | PROCEDURE | root@localhost | 2022-07-07 13:05:56 | 2022-07-07 13:05:56 | DEFINER       |         | utf8                 | utf8_general_ci      | latin1_swedish_ci  |
+| Example | studentList            | PROCEDURE | root@localhost | 2022-07-07 13:09:44 | 2022-07-07 13:09:44 | DEFINER       |         | utf8                 | utf8_general_ci      | latin1_swedish_ci  |
+| Example | studentList1           | PROCEDURE | root@localhost | 2022-07-07 13:14:30 | 2022-07-07 13:14:30 | DEFINER       |         | utf8                 | utf8_general_ci      | latin1_swedish_ci  |
++---------+------------------------+-----------+----------------+---------------------+---------------------+---------------+---------+----------------------+----------------------+--------------------+
+
+6.How to delete/drop stored procedures in MySQL?
+
+mysql> DROP PROCEDURE display_age_student;
+    -> /
+
+
+mysql> SHOW PROCEDURE STATUS WHERE db = 'Example'; 
+    -> /
++---------+------------------------+-----------+----------------+---------------------+---------------------+---------------+---------+----------------------+----------------------+--------------------+
+| Db      | Name                   | Type      | Definer        | Modified            | Created             | Security_type | Comment | character_set_client | collation_connection | Database Collation |
++---------+------------------------+-----------+----------------+---------------------+---------------------+---------------+---------+----------------------+----------------------+--------------------+
+| Example | display_age            | PROCEDURE | root@localhost | 2022-07-07 13:41:40 | 2022-07-07 13:41:40 | DEFINER       |         | utf8                 | utf8_general_ci      | latin1_swedish_ci  |
+| Example | display_age_of_student | PROCEDURE | root@localhost | 2022-07-07 14:40:57 | 2022-07-07 14:40:57 | DEFINER       |         | utf8                 | utf8_general_ci      | latin1_swedish_ci  |
+| Example | display_max_age        | PROCEDURE | root@localhost | 2022-07-07 13:34:52 | 2022-07-07 13:34:52 | DEFINER       |         | utf8                 | utf8_general_ci      | latin1_swedish_ci  |
+| Example | get_student            | PROCEDURE | root@localhost | 2022-07-07 13:21:33 | 2022-07-07 13:21:33 | DEFINER       |         | utf8                 | utf8_general_ci      | latin1_swedish_ci  |
+| Example | spStudent              | PROCEDURE | root@localhost | 2022-07-07 13:05:56 | 2022-07-07 13:05:56 | DEFINER       |         | utf8                 | utf8_general_ci      | latin1_swedish_ci  |
+| Example | studentList            | PROCEDURE | root@localhost | 2022-07-07 13:09:44 | 2022-07-07 13:09:44 | DEFINER       |         | utf8                 | utf8_general_ci      | latin1_swedish_ci  |
+| Example | studentList1           | PROCEDURE | root@localhost | 2022-07-07 13:14:30 | 2022-07-07 13:14:30 | DEFINER       |         | utf8                 | utf8_general_ci      | latin1_swedish_ci  |
++---------+------------------------+-----------+----------------+---------------------+---------------------+---------------+---------+----------------------+----------------------+--------------------+
+
+//Stroed_Function Examples:
+1.'employee' table
+mysql> select * from employee;
++----+----------+------+------------+-----------------+
+| id | name     | age  | dob        | department      |
++----+----------+------+------------+-----------------+
+|  1 | Darren   |   32 | 1988-05-20 | ENGINEERING     |
+|  2 | Abhishek |   28 | 1992-05-20 | ACCOUNTING      |
+|  3 | Amit     |   30 | 1990-09-20 | ENGINEERING     |
+|  4 | Steven   |   40 | 1980-05-21 | HUMAN RESOURCES |
+|  5 | Kartik   |   20 | 2000-05-12 | TRAINEE         |
++----+----------+------+------------+-----------------+
+
+***********************MySQL Stored Function****************************
+
+2.create a function that returns the customer occupation based on the age.
+
+->CREATE FUNCTION employee_department(
+        age int
+    )
+    RETURNS VARCHAR(20)
+    DETERMINISTIC
+    BEGIN
+        DECLARE employee_department VARCHAR(20);
+        IF age = 20 THEN 
+            SET employee_department="ENGINEER";
+        ELSEIF(age>20 AND age<30) THEN 
+            SET employee_department="HR";
+        ELSEIF age>31 THEN 
+            SET employee_department="ACCOUNTING";
+        END IF;
+
+        RETURN(employee_department);
+        END/
+
+
+->SELECT name, age, employee_department(age)  
+        FROM employee ORDER BY age;  
++----------+------+--------------------------+
+| name     | age  | employee_department(age) |
++----------+------+--------------------------+
+| Kartik   |   20 | ENGINEER                 |
+| Abhishek |   28 | HR                       |
+| Amit     |   30 | NULL                     |
+| Darren   |   32 | ACCOUNTING               |
+| Steven   |   40 | ACCOUNTING               |
++----------+------+--------------------------+
+
+
+->Stored Function Call in Procedure:
+
+3.Create a procedure in a database that uses employee_department() stored function.
+
+CREATE PROCEDURE GetEmployeeDetail()  
+BEGIN  
+    SELECT name, age, employee_department(age) FROM employee ORDER BY age;  
+END/ 
+
+->call GetEmployeeDetail;/
++----------+------+--------------------------+
+| name     | age  | employee_department(age) |
++----------+------+--------------------------+
+| Kartik   |   20 | ENGINEER                 |
+| Abhishek |   28 | HR                       |
+| Amit     |   30 | NULL                     |
+| Darren   |   32 | ACCOUNTING               |
+| Steven   |   40 | ACCOUNTING               |
++----------+------+--------------------------+
+
+4.List all the functions in 'Example' database.
+
+->SHOW FUNCTION STATUS WHERE db = 'Example';  
+
+5.Delete function:
+
+->Drop function employee_department;
+
+
+*******************************View Examples*******************************
+
+1. Create a view that selects employee information from 'trainee' department.
+
+->CREATE VIEW Trainee_Employee 
+    AS
+    SELECT name, dob, department
+    FROM employee
+    WHERE department = 'TRAINEE';/
+
+->SELECT * FROM Trainee_Employee;
+    -> /
++--------+------------+------------+
+| name   | dob        | department |
++--------+------------+------------+
+| Kartik | 2000-05-12 | TRAINEE    |
++--------+------------+------------+
+
+2.Update view:
+
+->  CREATE OR REPLACE VIEW Trainee_Employee AS
+        SELECT id, name, dob, department
+        FROM employee
+        WHERE department = 'TRAINEE';/
+
+SELECT * FROM Trainee_Employee;/
++----+--------+------------+------------+
+| id | name   | dob        | department |
++----+--------+------------+------------+
+|  5 | Kartik | 2000-05-12 | TRAINEE    |
++----+--------+------------+------------+
+
+3.Create view that selects every employee in the "employee" table with a age higher than the average age.
+
+->CREATE VIEW employee_age AS
+    SELECT name, age, dob
+    FROM employee
+    WHERE age > (SELECT AVG(age) FROM employee);/
+
+->SELECT * FROM employee_age;/
++--------+------+------------+
+| name   | age  | dob        |
++--------+------+------------+
+| Darren |   32 | 1988-05-20 |
+| Steven |   40 | 1980-05-21 |
++--------+------+------------+
+
+4.Create view that selects employee information in the 'employee' table with maximum age.
+
+->CREATE VIEW employee_max_age AS
+    SELECT name, age, dob
+    FROM employee
+    WHERE age = (SELECT MAX(age) FROM employee);/
+
+->select * from employee_max_age;/
++--------+------+------------+
+| name   | age  | dob        |
++--------+------+------------+
+| Steven |   40 | 1980-05-21 |
++--------+------+------------+
+
+5.Delete teh view:
+
+->DROP VIEW employee_max_age;
+
+
+
+    
+    
